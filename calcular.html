@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculos</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(to right, rgb(179, 255, 164), rgb(189, 206, 186));
+        }
+
+        header {
+            text-align: center;
+        }
+
+        section {
+            overflow: hidden;
+            padding: 20px;
+            text-align: center;
+            margin: auto;
+            width: 300px;
+            height: 370px;
+            background: rgba(104, 104, 104, 0.219);
+            border-radius: 10px;
+            box-shadow: black 5px 5px 7px;
+        }
+
+        section p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        section input {
+            width: 120px;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #resultado {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        footer {
+            font-size: 0.7em;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PORCENTO</h1>
+    </header>
+    <section>
+        <p>
+            Valor referência:
+            <input type="number" name="number" id="number">
+        </p>
+        <p>
+            Quantos %:
+            <input type="number" name="percentage" id="percentage">
+        </p>
+        <div id="buttons">
+            <input type="button" value="Saber a %" onclick="porc()">
+            <input type="button" value="Descontar" onclick="des()">
+            <input type="button" value="Adicionar" onclick="add()">
+        </div>
+        <hr>
+        <div id="resultado"></div>
+    </section>
+    <footer>É só o começo!</footer>
+
+    <script>
+        const result = document.querySelector('#resultado')
+        let txtRef = document.querySelector('#number')
+        let txtPerc = document.querySelector('#percentage')
+
+        function porc() {
+            let valorRef = parseFloat(txtRef.value)
+            let valorPorc = parseFloat(txtPerc.value)
+            result.innerHTML = `
+    <strong>VALOR $ RELACIONADO A %</strong><br><br>
+    Taxa: ${valorPorc.toFixed(2)}%<br>
+    Valor: R$ ${valorRef.toFixed(2)}<br><br>
+    Resultado: R$ ${((valorPorc / 100) * valorRef).toFixed(2)}`
+        }
+
+        function add() {
+            let valorRef = parseFloat(txtRef.value)
+            let valorPorc = parseFloat(txtPerc.value)
+            result.innerHTML = `
+    <strong>VALOR TOTAL SOMANDO COM A %</strong><br><br>
+    Taxa: ${valorPorc.toFixed(2)}%<br>
+    Valor: R$ ${valorRef.toFixed(2)}<br><br>
+    Resultado: R$ ${(valorRef + (valorRef * (valorPorc / 100))).toFixed(2)}`
+        }
+
+        function des() {
+            let valorRef = parseFloat(txtRef.value)
+            let valorPorc = parseFloat(txtPerc.value)
+            result.innerHTML = `
+    <strong>VALOR COM DESCONTO DA %</strong><br><br>
+    Taxa: ${valorPorc.toFixed(2)}%<br>
+    Valor: R$ ${valorRef.toFixed(2)}<br><br>
+    Resultado: R$ ${(valorRef - (valorRef * (valorPorc / 100))).toFixed(2)}`
+        }
+    </script>
+
+</body>
+
+</html>
